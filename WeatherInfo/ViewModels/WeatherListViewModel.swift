@@ -10,15 +10,16 @@ import Foundation
 class WeatherListViewModel {
     
     /// all cites' weather info
-    var orders = [WeatherInfoProperties]()
+    var cityList = [WeatherInfoProperties]()
     
     func fetchAllStoredCitiesInfo () {
         StorageManager.instance.getAllCitiesID { IDs in
+            
             ApiManager.instance.fetchInfoWith(cityIDs: IDs) { (weatherList) in
-                print(weatherList)
+                self.cityList = weatherList.list
             }
         }
-        
-        
     }
+    
+    
 }
