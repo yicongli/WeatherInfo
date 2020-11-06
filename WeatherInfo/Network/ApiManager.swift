@@ -23,7 +23,8 @@ class ApiManager {
         fetchWeatherInfoWith(param: param, completionHandler: completionHandler)
     }
     
-    func fetchWeatherInfoWith(param: [String:String], completionHandler: @escaping ((WeatherInfoProperties) -> ())) {
+    
+    private func fetchWeatherInfoWith(param: [String:String], completionHandler: @escaping ((WeatherInfoProperties) -> ())) {
         
         AF.request(ApiManager.Keys.baseUrl, parameters: param).validate().responseDecodable(of: WeatherInfoProperties.self) { response in
             
