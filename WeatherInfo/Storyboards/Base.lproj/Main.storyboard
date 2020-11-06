@@ -17,13 +17,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2Yy-0j-0Kx">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherTableViewCell" id="2Yy-0j-0Kx" customClass="WeatherTableViewCell" customModule="WeatherInfo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Yy-0j-0Kx" id="E0t-ee-Mg0">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-tZ-gB6">
+                                            <rect key="frame" x="20" y="11" width="79.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0 °C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-1v-Kah">
+                                            <rect key="frame" x="99.5" y="11" width="286.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="PaQ-tZ-gB6" firstAttribute="leading" secondItem="E0t-ee-Mg0" secondAttribute="leadingMargin" id="7fz-NT-9G3"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="AjE-1v-Kah" secondAttribute="trailing" constant="8" id="9MY-km-gni"/>
+                                        <constraint firstItem="PaQ-tZ-gB6" firstAttribute="top" secondItem="E0t-ee-Mg0" secondAttribute="topMargin" id="fY4-hQ-rdN"/>
+                                        <constraint firstItem="PaQ-tZ-gB6" firstAttribute="bottom" secondItem="E0t-ee-Mg0" secondAttribute="bottomMargin" id="fsY-ng-ByM"/>
+                                        <constraint firstItem="AjE-1v-Kah" firstAttribute="leading" secondItem="PaQ-tZ-gB6" secondAttribute="trailing" id="oCI-9c-1IS"/>
+                                        <constraint firstItem="AjE-1v-Kah" firstAttribute="bottom" secondItem="E0t-ee-Mg0" secondAttribute="bottomMargin" id="qLP-5a-DBj"/>
+                                        <constraint firstItem="AjE-1v-Kah" firstAttribute="top" secondItem="E0t-ee-Mg0" secondAttribute="topMargin" id="rt4-P4-H7O"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cityNameLabel" destination="PaQ-tZ-gB6" id="4vV-5t-wiz"/>
+                                    <outlet property="temperatureLabel" destination="AjE-1v-Kah" id="85n-6Y-GRz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

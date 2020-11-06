@@ -6,87 +6,70 @@
 //
 
 import UIKit
+import SnapKit
 
 class WeatherListTableViewController: UITableViewController {
 
     let model = WeatherListViewModel()
     
+    private lazy var spinner: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .gray
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if spinner.superview == nil, let superView = tableView.superview {
+            superView.addSubview(spinner)
+            superView.bringSubviewToFront(spinner)
+            spinner.snp.makeConstraints { (maker) in
+                maker.center.equalToSuperview()
+            }
+        }
+        
+        spinner.startAnimating()
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        model.fetchAllStoredCitiesInfo { [weak self] in
+            self?.tableView.reloadData()
+            self?.spinner.stopAnimating()
+            self?.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        model.fetchAllStoredCitiesInfo()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
+extension WeatherListTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return model.cityList.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as? WeatherTableViewCell else {
+            
+            print("dequeueReusableCell doesn't return cell")
+            return WeatherTableViewCell()
+        }
 
-        // Configure the cell...
+        cell.setCellValue(weatherinfo: model.cityList[indexPath.row])
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Did selet row at: \(indexPath.row)")
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
