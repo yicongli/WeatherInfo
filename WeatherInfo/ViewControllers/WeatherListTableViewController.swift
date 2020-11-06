@@ -44,6 +44,16 @@ class WeatherListTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    @IBAction func showSearchVC(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: String(describing: CitySearchViewController.self)) as! CitySearchViewController
+        
+        self.present(vc, animated: true) {
+            
+        }
+    }
+    
     func showDetailsVC(selectedInfo: WeatherInfoProperties) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(

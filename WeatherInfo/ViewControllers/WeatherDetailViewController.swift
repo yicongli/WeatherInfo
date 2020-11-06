@@ -9,6 +9,15 @@ import UIKit
 
 class WeatherDetailViewController: UIViewController {
 
+    @IBOutlet weak var sunRiseLabel: UILabel!
+    @IBOutlet weak var sunSetLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var visibilityLabel: UILabel!
+    @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    
     let model = WeatherDetailViewModel()
     
     override func viewDidLoad() {
