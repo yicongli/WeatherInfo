@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="1483" y="47"/>
         </scene>
-        <!--Weather Detail View Controller-->
+        <!--Weather Details-->
         <scene sceneID="8tU-zL-VJ3">
             <objects>
-                <viewController id="0XS-e9-jtx" customClass="WeatherDetailViewController" customModule="WeatherInfo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherDetailViewController" id="0XS-e9-jtx" customClass="WeatherDetailViewController" customModule="WeatherInfo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gbS-5u-9aP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,6 +85,7 @@
                         <viewLayoutGuide key="safeArea" id="Vzx-JT-54p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Weather Details" id="aGU-Ve-Dhu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS0-tf-bfo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

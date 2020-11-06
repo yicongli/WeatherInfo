@@ -9,6 +9,8 @@ import UIKit
 
 class WeatherDetailViewController: UIViewController {
 
+    let model = WeatherDetailViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

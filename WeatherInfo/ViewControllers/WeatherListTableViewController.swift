@@ -43,6 +43,16 @@ class WeatherListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func showDetailsVC(selectedInfo: WeatherInfoProperties) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: String(describing: WeatherDetailViewController.self)) as! WeatherDetailViewController
+        
+        vc.model.updateCityInfo(selectedInfo)
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - Table view data source
@@ -70,6 +80,6 @@ extension WeatherListTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Did selet row at: \(indexPath.row)")
-        
+        showDetailsVC(selectedInfo: model.cityList[indexPath.row])
     }
 }

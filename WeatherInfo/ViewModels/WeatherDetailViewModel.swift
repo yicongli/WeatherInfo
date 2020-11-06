@@ -9,6 +9,10 @@ import Foundation
 
 class WeatherDetailViewModel {
     
+    var cityInfo:WeatherInfoProperties? = nil
     
+    func updateCityInfo(_ info:WeatherInfoProperties){
+        cityInfo = info
+    }
 }
 
