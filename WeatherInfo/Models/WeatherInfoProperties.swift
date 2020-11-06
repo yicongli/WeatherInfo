@@ -32,5 +32,4 @@ struct WeatherInfoProperties: Decodable {
         case id         = "id"
         case name       = "name"
     }
-    
 }

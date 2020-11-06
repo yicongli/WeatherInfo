@@ -10,15 +10,12 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    let model = WeatherListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //ApiManager.instance.fetchWeatherInfo(city_ID: 2147714) {
-        ApiManager.instance.fetchWeatherInfo(city_ID: 2147714) { weatherInfo in
-            print(weatherInfo)
-        }
-            
         // Do any additional setup after loading the view.
+        model.fetchAllStoredCitiesInfo()
     }
 
 

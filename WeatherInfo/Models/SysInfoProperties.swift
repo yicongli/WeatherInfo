@@ -9,15 +9,13 @@ import Foundation
 
 struct SysInfoProperties: Decodable {
     
-    let type: Int
-    let id: Int
+    let timezone: Int
     let country: String
     let sunrise: Int
     let sunset: Int
     
     enum CodingKeys: String, CodingKey {
-        case type       = "type"
-        case id         = "id"
+        case timezone   = "timezone"
         case country    = "country"
         case sunrise    = "sunrise"
         case sunset     = "sunset"

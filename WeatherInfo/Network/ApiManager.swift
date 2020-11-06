@@ -14,19 +14,23 @@ class ApiManager {
     
     struct Keys {
         static let apiKey = "510be3c03e74d8facbd91929b953cb28"
-        static let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
+        static let multipleCitiesUrl = "https://api.openweathermap.org/data/2.5/group"
+        
     }
     
-    func fetchWeatherInfo(city_ID: Int, completionHandler: @escaping ((WeatherInfoProperties) -> ())) {
+    func fetchInfoWith(cityIDs: [Int], completionHandler: @escaping ((WeatherListProperties) -> ())) {
         
-        let param = ["id":String(city_ID), "units": "metric", "APPID": Keys.apiKey]
+        let idStr = cityIDs.map(String.init).joined(separator: ",")
+        let param = ["id":idStr, "units": "metric", "APPID": Keys.apiKey]
         fetchWeatherInfoWith(param: param, completionHandler: completionHandler)
     }
     
-    
-    private func fetchWeatherInfoWith(param: [String:String], completionHandler: @escaping ((WeatherInfoProperties) -> ())) {
+    private func fetchWeatherInfoWith(param: [String:String],
+                                      completionHandler: @escaping ((WeatherListProperties) -> ())) {
         
-        AF.request(ApiManager.Keys.baseUrl, parameters: param).validate().responseDecodable(of: WeatherInfoProperties.self) { response in
+        AF.request(Keys.multipleCitiesUrl, parameters: param)
+            .validate()
+            .responseDecodable(of: WeatherListProperties.self) { response in
             
             guard let weatherInfo = response.value else {
                 debugPrint("Error! : \(response.error.debugDescription)")
