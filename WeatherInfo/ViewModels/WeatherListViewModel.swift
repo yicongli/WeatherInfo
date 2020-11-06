@@ -13,8 +13,12 @@ class WeatherListViewModel {
     var orders = [WeatherInfoProperties]()
     
     func fetchAllStoredCitiesInfo () {
-        ApiManager.instance.fetchInfoWith(cityIDs: [4163971, 2147714, 2174003]) { (weatherList) in
-            print(weatherList)
+        StorageManager.instance.getAllCitiesID { IDs in
+            ApiManager.instance.fetchInfoWith(cityIDs: IDs) { (weatherList) in
+                print(weatherList)
+            }
         }
+        
+        
     }
 }

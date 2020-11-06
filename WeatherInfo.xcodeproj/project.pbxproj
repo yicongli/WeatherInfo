@@ -27,6 +27,8 @@
 		489B96F5255511B700E3C7B3 /* WeatherDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B96F4255511B700E3C7B3 /* WeatherDetailViewModel.swift */; };
 		489B96FA255511CD00E3C7B3 /* WeatherSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B96F9255511CD00E3C7B3 /* WeatherSearchViewModel.swift */; };
 		489B97032555177400E3C7B3 /* WeatherListProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B97022555177400E3C7B3 /* WeatherListProperties.swift */; };
+		489B970B25551CD400E3C7B3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B970A25551CD400E3C7B3 /* StorageManager.swift */; };
+		489B971425551D1600E3C7B3 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B971325551D1600E3C7B3 /* StorageError.swift */; };
 		9E97823ACE0F2F18A43B3821 /* Pods_WeatherInfoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD96B15DD7C88AA1619A9C3 /* Pods_WeatherInfoTests.framework */; };
 		A6235417361156FCB3F7F09F /* Pods_WeatherInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE60DB14C6B585F6A7296BB /* Pods_WeatherInfo.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +79,8 @@
 		489B96F4255511B700E3C7B3 /* WeatherDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModel.swift; sourceTree = "<group>"; };
 		489B96F9255511CD00E3C7B3 /* WeatherSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSearchViewModel.swift; sourceTree = "<group>"; };
 		489B97022555177400E3C7B3 /* WeatherListProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListProperties.swift; sourceTree = "<group>"; };
+		489B970A25551CD400E3C7B3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		489B971325551D1600E3C7B3 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
 		565BC51CBB4CEDAF3F23858D /* Pods-WeatherInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherInfo.release.xcconfig"; path = "Target Support Files/Pods-WeatherInfo/Pods-WeatherInfo.release.xcconfig"; sourceTree = "<group>"; };
 		6BD96B15DD7C88AA1619A9C3 /* Pods_WeatherInfoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherInfoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F55405808ACACF92ED0BAC1 /* Pods-WeatherInfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherInfoTests.release.xcconfig"; path = "Target Support Files/Pods-WeatherInfoTests/Pods-WeatherInfoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				489B96762554D76100E3C7B3 /* Info.plist */,
+				489B970F25551CDC00E3C7B3 /* Storage */,
 				489B96FE255511D500E3C7B3 /* ViewModels */,
 				489B96CE2554EF0900E3C7B3 /* Models */,
 				489B96A72554DE8B00E3C7B3 /* ViewControllers */,
@@ -233,6 +238,15 @@
 				489B96F9255511CD00E3C7B3 /* WeatherSearchViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		489B970F25551CDC00E3C7B3 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				489B970A25551CD400E3C7B3 /* StorageManager.swift */,
+				489B971325551D1600E3C7B3 /* StorageError.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		5A76638EC83B1E63DA9059FE /* Frameworks */ = {
@@ -470,10 +484,12 @@
 				489B96B82554ED8600E3C7B3 /* WeatherInfoProperties.swift in Sources */,
 				489B96C02554EE8700E3C7B3 /* CoordinateProperties.swift in Sources */,
 				489B96662554D75F00E3C7B3 /* AppDelegate.swift in Sources */,
+				489B971425551D1600E3C7B3 /* StorageError.swift in Sources */,
 				489B96F02555119F00E3C7B3 /* WeatherListViewModel.swift in Sources */,
 				489B96E02554F1C400E3C7B3 /* WindProperties.swift in Sources */,
 				489B96C52554EEB300E3C7B3 /* MainTempProperties.swift in Sources */,
 				489B96F5255511B700E3C7B3 /* WeatherDetailViewModel.swift in Sources */,
+				489B970B25551CD400E3C7B3 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
