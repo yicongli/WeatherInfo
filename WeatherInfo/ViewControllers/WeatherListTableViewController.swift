@@ -61,11 +61,10 @@ class WeatherListTableViewController: UITableViewController {
     @IBAction func showSearchVC(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(
-            withIdentifier: String(describing: CitySearchViewController.self)) as! CitySearchViewController
+            withIdentifier: String(describing: "CitySearchNavVC")) as! UINavigationController
         
-        self.present(vc, animated: true) {
-            
-        }
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {}
     }
     
     func showDetailsVC(selectedInfo: WeatherInfoProperties) {
