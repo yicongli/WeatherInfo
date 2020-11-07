@@ -17,18 +17,14 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
 
     let model = WeatherSearchViewModel()
     var resultDelegate: HandleCitySelection? = nil
-    
-    let locationManager = CLLocationManager()
     var resultSearchController:UISearchController? = nil
-    var selectedPin:MKPlacemark? = nil
-    var currentUserLocation: CLLocation? = nil
     
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
-        setupLocationManager()
+        model.setupLocationManager()
         
         let mytapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myTapAction))
         mytapGestureRecognizer.numberOfTapsRequired = 1
@@ -36,6 +32,7 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    // MARK: - Actions
     @objc func myTapAction(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: mapView)
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
@@ -50,24 +47,18 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func addNewCity(_ sender: Any) {
         self.dismiss(animated: true) {}
-        resultDelegate?.didSelectCity(placemark: selectedPin!)
+        resultDelegate?.didSelectCity(placemark: model.selectedPin!)
     }
     
     @IBAction func backToCurrentLocation(_ sender: Any) {
-        guard let location = currentUserLocation else {
+        guard let location = model.currentUserLocation else {
             return
         }
         
         setAnnotationWithLocation(location)
     }
     
-    func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
+    // MARK: - set objects
     func setupSearchBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let resultVC = storyboard.instantiateViewController(
@@ -100,7 +91,7 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func setAnnotationWithPlaceMark(_ placemark:MKPlacemark) {
         // cache the pin
-        selectedPin = placemark
+        model.selectedPin = placemark
         // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
@@ -108,7 +99,7 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         //annotation.title = placemark.name
         if let city = placemark.locality,
         let state = placemark.administrativeArea {
-            annotation.title = " \(city) \(state)"
+            annotation.title = "\(city) \(state)"
         }
         
         mapView.addAnnotation(annotation)
@@ -117,33 +108,6 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         mapView.setRegion(region, animated: true)
     }
 
-}
-
-extension CitySearchViewController: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        let status = manager.authorizationStatus
-        if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            if (currentUserLocation == nil) {
-                currentUserLocation = location
-                let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
-                let region = MKCoordinateRegion(center: location.coordinate, span: span)
-                mapView.setRegion(region, animated: false)
-                print("location: \(location)")
-                
-                setAnnotationWithLocation(location)
-            }
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error:: (error)")
-    }
 }
 
 extension CitySearchViewController: HandleMapSearch {

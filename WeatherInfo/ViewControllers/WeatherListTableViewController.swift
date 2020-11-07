@@ -32,7 +32,7 @@ class WeatherListTableViewController: UITableViewController {
             self?.fetchAllCityInfo()
             
             if let vc = self?.navigationController?.topViewController as? WeatherDetailViewController,
-               let city = self?.model.selectedCity{
+               let city = self?.model.selectedCity {
                 vc.model.updateCityInfo(city) {
                     vc.setLabels()
                 }
@@ -58,6 +58,8 @@ class WeatherListTableViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nav = storyboard.instantiateViewController(
             withIdentifier: String(describing: "CitySearchNavVC")) as! UINavigationController
+        
+        // set resultDelegate
         let vc = nav.topViewController as! CitySearchViewController
         vc.resultDelegate = self
         
@@ -118,6 +120,7 @@ extension WeatherListTableViewController {
     }
 }
 
+// MARK: - 
 extension WeatherListTableViewController: HandleCitySelection {
     
     func didSelectCity(placemark: MKPlacemark) {
