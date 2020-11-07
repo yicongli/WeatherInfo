@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class WeatherDetailViewController: UIViewController {
 
@@ -14,14 +15,16 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var lowHighTempLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var weatherImage: UIImageView!
     
     let model = WeatherDetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.allowsSelection = false
         setContents()
+        setImageView()
     }
     
     func setContents() {
@@ -36,6 +39,35 @@ class WeatherDetailViewController: UIViewController {
         lowHighTempLabel.text = "L:\(String.doulbelToTempStr(temp: info.main.tempMin)) H:\(String.doulbelToTempStr(temp: info.main.tempMax))"
 
         tableView.reloadData()
+    }
+    
+    // set imangeView
+    func setImageView () {
+        guard let info = model.cityInfo, let icon = info.weather.first?.icon else {
+            debugPrint("no image info")
+            return
+        }
+        
+        let url = URL(string: ApiManager.Keys.imageUrl + icon + "@2x.png")
+
+        weatherImage.kf.indicatorType = .activity
+        weatherImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "DefaultImage"),
+            options: [
+                .transition(.fade(0.5)),
+                .cacheOriginalImage
+            ], completionHandler: 
+                {
+                    // get the loading result
+                    result in
+                    switch result {
+                    case .success(let value):
+                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Job failed: \(error.localizedDescription)")
+                    }
+                })
     }
 }
 

@@ -17,6 +17,7 @@ class ApiManager {
         static let apiKey = "510be3c03e74d8facbd91929b953cb28"
         static let oneCityUrl = "https://api.openweathermap.org/data/2.5/weather"
         static let multipleCitiesUrl = "https://api.openweathermap.org/data/2.5/group"
+        static let imageUrl = "https://openweathermap.org/img/wn/"
         
     }
     

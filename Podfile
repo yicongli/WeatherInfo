@@ -5,9 +5,11 @@ use_frameworks!
 target 'WeatherInfo' do 
     pod 'Alamofire', '~> 5.1'
     pod 'SnapKit'
+    pod 'Kingfisher'
 end
 
 target 'WeatherInfoTests' do
     pod 'Alamofire', '~> 5.1'
     pod 'SnapKit'
+    pod 'Kingfisher'
 end

@@ -19,20 +19,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherTableViewCell" id="2Yy-0j-0Kx" customClass="WeatherTableViewCell" customModule="WeatherInfo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Yy-0j-0Kx" id="E0t-ee-Mg0">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-tZ-gB6">
-                                            <rect key="frame" x="20" y="11" width="79.5" height="21.5"/>
+                                            <rect key="frame" x="20" y="11" width="79.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0 °C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-1v-Kah">
-                                            <rect key="frame" x="99.5" y="11" width="286.5" height="21.5"/>
+                                            <rect key="frame" x="99.5" y="11" width="286.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -118,9 +118,17 @@
                                         <color key="textColor" red="0.96451991579999996" green="0.96451991579999996" blue="0.96451991579999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-VM-5CK">
+                                        <rect key="frame" x="277" y="93.5" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="OEc-cr-bEh"/>
+                                            <constraint firstAttribute="height" constant="60" id="lOj-pc-x8X"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.49041102519271956" green="0.66265046840778652" blue="0.96451991580310881" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstItem="wWR-VM-5CK" firstAttribute="centerX" secondItem="1cf-ga-bkE" secondAttribute="centerX" constant="100" id="72w-ly-Ux3"/>
                                     <constraint firstItem="otw-mg-UAK" firstAttribute="leading" secondItem="1cf-ga-bkE" secondAttribute="leading" id="FQF-Qh-H8q"/>
                                     <constraint firstItem="8k8-47-efj" firstAttribute="leading" secondItem="1cf-ga-bkE" secondAttribute="leading" id="KzU-tZ-PD5"/>
                                     <constraint firstAttribute="trailing" secondItem="9fG-Bh-VuN" secondAttribute="trailing" id="UVc-ta-zdE"/>
@@ -132,6 +140,7 @@
                                     <constraint firstAttribute="trailing" secondItem="U5M-Ta-y73" secondAttribute="trailing" id="fgw-Bd-mRz"/>
                                     <constraint firstItem="9fG-Bh-VuN" firstAttribute="top" secondItem="U5M-Ta-y73" secondAttribute="bottom" constant="8" symbolic="YES" id="jmo-Kc-QY0"/>
                                     <constraint firstAttribute="trailing" secondItem="8k8-47-efj" secondAttribute="trailing" id="pBO-Uq-4Nr"/>
+                                    <constraint firstItem="wWR-VM-5CK" firstAttribute="centerY" secondItem="1cf-ga-bkE" secondAttribute="centerY" constant="20" id="tou-4l-jo1"/>
                                     <constraint firstAttribute="trailing" secondItem="otw-mg-UAK" secondAttribute="trailing" id="x1W-hj-2IS"/>
                                     <constraint firstItem="otw-mg-UAK" firstAttribute="top" secondItem="8k8-47-efj" secondAttribute="bottom" constant="8" symbolic="YES" id="y3O-yI-h9N"/>
                                 </constraints>
@@ -200,6 +209,7 @@
                         <outlet property="lowHighTempLabel" destination="9fG-Bh-VuN" id="XPF-H3-VSp"/>
                         <outlet property="tableView" destination="zLE-sv-7hF" id="GL7-F5-rao"/>
                         <outlet property="weatherConLabel" destination="otw-mg-UAK" id="zQf-Qh-PZ9"/>
+                        <outlet property="weatherImage" destination="wWR-VM-5CK" id="MIC-Q1-K5C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS0-tf-bfo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,8 +269,8 @@
                                 <rect key="frame" x="284" y="777" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.5084509062" green="0.68702621639999994" blue="1" alpha="0.32127530809999999" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="lR6-eS-cRs" secondAttribute="height" id="6Ft-oP-ieo"/>
                                     <constraint firstAttribute="height" constant="40" id="MBa-GK-lu1"/>
-                                    <constraint firstAttribute="width" constant="40" id="ipE-7f-Mis"/>
                                 </constraints>
                                 <state key="normal" title="Add"/>
                                 <userDefinedRuntimeAttributes>
