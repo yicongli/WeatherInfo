@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 class WeatherListViewModel {
     
@@ -32,6 +33,18 @@ class WeatherListViewModel {
             
             ApiManager.instance.fetchInfoWith(cityIDs: IDs) { (weatherList) in
                 self.cityList = weatherList.list
+                completionHandler()
+            }
+        }
+    }
+    
+    func fetchSelectedCityInfo (placemark: MKPlacemark,completionHandler: @escaping () -> Void) {
+        var cityIDs = cityList.map{$0.id}
+        ApiManager.instance.fetchSingleCityInfoWith(placemark: placemark) { (cityInfo) in
+            cityIDs.append(cityInfo.id)
+            ApiManager.instance.fetchInfoWith(cityIDs: cityIDs) { (weatherList) in
+                self.cityList = weatherList.list
+                StorageManager.instance.storeAllCitiesID(cityIDs: cityIDs)
                 completionHandler()
             }
         }

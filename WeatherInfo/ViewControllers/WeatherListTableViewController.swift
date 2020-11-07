@@ -7,6 +7,12 @@
 
 import UIKit
 import SnapKit
+import MapKit
+
+protocol HandleCitySelection {
+    
+    func didSelectCity(placemark: MKPlacemark)
+}
 
 class WeatherListTableViewController: UITableViewController {
 
@@ -18,6 +24,21 @@ class WeatherListTableViewController: UITableViewController {
         indicator.hidesWhenStopped = true
         return indicator
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        model.startTimer { [weak self] in
+            self?.fetchAllCityInfo()
+            
+            if let vc = self?.navigationController?.topViewController as? WeatherDetailViewController,
+               let city = self?.model.selectedCity{
+                vc.model.updateCityInfo(city) {
+                    vc.setLabels()
+                }
+            }
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,18 +54,25 @@ class WeatherListTableViewController: UITableViewController {
         fetchAllCityInfo()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func showSearchVC(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nav = storyboard.instantiateViewController(
+            withIdentifier: String(describing: "CitySearchNavVC")) as! UINavigationController
+        let vc = nav.topViewController as! CitySearchViewController
+        vc.resultDelegate = self
         
-        model.startTimer {
-            self.fetchAllCityInfo()
-            
-            if let vc = self.navigationController?.topViewController as? WeatherDetailViewController {
-                vc.model.updateCityInfo(self.model.selectedCity!) {
-                    vc.setLabels()
-                }
-            }
-        }
+        nav.modalPresentationStyle = .overCurrentContext
+        self.present(nav, animated: true) {}
+    }
+    
+    func showDetailsVC(selectedInfo: WeatherInfoProperties) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: String(describing: WeatherDetailViewController.self)) as! WeatherDetailViewController
+        
+        vc.model.updateCityInfo(selectedInfo) {}
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func fetchAllCityInfo() {
@@ -56,25 +84,6 @@ class WeatherListTableViewController: UITableViewController {
             self?.spinner.stopAnimating()
             self?.navigationItem.rightBarButtonItem?.isEnabled = true
         }
-    }
-    
-    @IBAction func showSearchVC(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: String(describing: "CitySearchNavVC")) as! UINavigationController
-        
-        vc.modalPresentationStyle = .overCurrentContext
-        self.present(vc, animated: true) {}
-    }
-    
-    func showDetailsVC(selectedInfo: WeatherInfoProperties) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: String(describing: WeatherDetailViewController.self)) as! WeatherDetailViewController
-        
-        vc.model.updateCityInfo(selectedInfo) {}
-        
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -107,4 +116,20 @@ extension WeatherListTableViewController {
         model.selectedIndex = indexPath.row
         showDetailsVC(selectedInfo: model.selectedCity!)
     }
+}
+
+extension WeatherListTableViewController: HandleCitySelection {
+    
+    func didSelectCity(placemark: MKPlacemark) {
+        spinner.startAnimating()
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        model.fetchSelectedCityInfo(placemark: placemark) { [weak self] in
+            self?.tableView.reloadData()
+            self?.spinner.stopAnimating()
+            self?.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
+    
+
 }

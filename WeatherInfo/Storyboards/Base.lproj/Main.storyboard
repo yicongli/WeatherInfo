@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -414,14 +415,54 @@
                                     <outlet property="delegate" destination="ISJ-9J-GRj" id="lc7-p1-OeK"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoz-hg-Pbq">
+                                <rect key="frame" x="344" y="777" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.50845090615301414" green="0.68702621641153949" blue="1" alpha="0.32127530809859156" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="WcD-pI-iyO"/>
+                                    <constraint firstAttribute="height" constant="40" id="btP-sR-6lY"/>
+                                </constraints>
+                                <state key="normal">
+                                    <imageReference key="image" image="location.circle" catalog="system" symbolScale="large"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backToCurrentLocation:" destination="ISJ-9J-GRj" eventType="touchUpInside" id="6pS-zk-MLG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lR6-eS-cRs">
+                                <rect key="frame" x="284" y="777" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.5084509062" green="0.68702621639999994" blue="1" alpha="0.32127530809999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MBa-GK-lu1"/>
+                                    <constraint firstAttribute="width" constant="40" id="ipE-7f-Mis"/>
+                                </constraints>
+                                <state key="normal" title="Add"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addNewCity:" destination="ISJ-9J-GRj" eventType="touchUpInside" id="BV1-KF-p5P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lTB-pF-WiK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="lTB-pF-WiK" firstAttribute="trailing" secondItem="xoz-hg-Pbq" secondAttribute="trailing" constant="30" id="5R0-Fg-iZf"/>
                             <constraint firstItem="lTB-pF-WiK" firstAttribute="trailing" secondItem="UsK-9B-rn5" secondAttribute="trailing" id="5vR-vV-Pjy"/>
                             <constraint firstItem="lTB-pF-WiK" firstAttribute="bottom" secondItem="UsK-9B-rn5" secondAttribute="bottom" id="6ff-ey-az9"/>
                             <constraint firstItem="UsK-9B-rn5" firstAttribute="leading" secondItem="lTB-pF-WiK" secondAttribute="leading" id="KVM-ie-3Wk"/>
+                            <constraint firstItem="lR6-eS-cRs" firstAttribute="centerX" secondItem="xoz-hg-Pbq" secondAttribute="centerX" constant="-60" id="L1J-cy-GSP"/>
                             <constraint firstItem="UsK-9B-rn5" firstAttribute="top" secondItem="lTB-pF-WiK" secondAttribute="top" id="e0n-rk-WPF"/>
+                            <constraint firstItem="lTB-pF-WiK" firstAttribute="bottom" secondItem="xoz-hg-Pbq" secondAttribute="bottom" constant="45" id="evN-3a-18m"/>
+                            <constraint firstItem="lR6-eS-cRs" firstAttribute="centerY" secondItem="xoz-hg-Pbq" secondAttribute="centerY" id="qej-0f-U4z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search City" id="H99-0S-Pq9">
@@ -437,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTf-au-qqD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2187" y="731"/>
+            <point key="canvasLocation" x="2186.9565217391305" y="730.58035714285711"/>
         </scene>
         <!--Search Result Table View Controller-->
         <scene sceneID="coh-RE-Ivc">
@@ -502,6 +543,7 @@
     </scenes>
     <resources>
         <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
+        <image name="location.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
