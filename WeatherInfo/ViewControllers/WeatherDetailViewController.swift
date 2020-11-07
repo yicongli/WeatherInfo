@@ -9,6 +9,11 @@ import UIKit
 
 class WeatherDetailViewController: UIViewController {
 
+    @IBOutlet weak var cityNameLabel: UILabel!
+    @IBOutlet weak var weatherConLabel: UILabel!
+    @IBOutlet weak var currentTempLabel: UILabel!
+    @IBOutlet weak var lowHighTempLabel: UILabel!
+    
     @IBOutlet weak var sunRiseLabel: UILabel!
     @IBOutlet weak var sunSetLabel: UILabel!
     @IBOutlet weak var feelsLikeLabel: UILabel!
@@ -24,17 +29,27 @@ class WeatherDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setLabels()
     }
     
+    func setLabels() {
+        guard let info = model.cityInfo else {
+            debugPrint("no city info")
+            return
+        }
+        
+        cityNameLabel.text = info.name
+        weatherConLabel.text = info.weather.first?.description
+        currentTempLabel.text = String.doulbelToTempStr(temp: info.main.temp)
+        lowHighTempLabel.text = "L:\(String.doulbelToTempStr(temp: info.main.tempMin)) H:\(String.doulbelToTempStr(temp: info.main.tempMax))"
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        sunRiseLabel.text = Date.numberToTimeStr(dateNumber: info.sys.sunrise, secondsFromGMT: info.sys.timezone)
+        sunSetLabel.text = Date.numberToTimeStr(dateNumber: info.sys.sunset, secondsFromGMT: info.sys.timezone)
+        feelsLikeLabel.text = String.doulbelToTempStr(temp: info.main.feelsLike)
+        humidityLabel.text = "\(info.main.humidity)%"
+        pressureLabel.text = "\(info.main.pressure) hPa"
+        visibilityLabel.text = "\(Double(info.visibility)/1000) km"
+        windLabel.text = "\(info.wind.speed) km/h"
+        countryLabel.text = info.sys.country
     }
-    */
-
 }

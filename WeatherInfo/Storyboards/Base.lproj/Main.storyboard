@@ -146,7 +146,7 @@
                                 <rect key="frame" x="0.0" y="252" width="414" height="610"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-Fq-Kdd">
-                                        <rect key="frame" x="20" y="10" width="374" height="590"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="580"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="3Hj-nL-mqc" userLabel="Sun">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="57.5"/>
@@ -344,7 +344,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8kv-Fq-Kdd" secondAttribute="bottom" constant="10" id="ZjD-ax-nhB"/>
                                     <constraint firstAttribute="trailing" secondItem="8kv-Fq-Kdd" secondAttribute="trailing" constant="20" id="g4r-PL-hfq"/>
-                                    <constraint firstItem="8kv-Fq-Kdd" firstAttribute="top" secondItem="9rq-aV-TvQ" secondAttribute="top" constant="10" id="gJ9-WV-qDp"/>
+                                    <constraint firstItem="8kv-Fq-Kdd" firstAttribute="top" secondItem="9rq-aV-TvQ" secondAttribute="top" constant="20" id="gJ9-WV-qDp"/>
                                     <constraint firstItem="8kv-Fq-Kdd" firstAttribute="leading" secondItem="9rq-aV-TvQ" secondAttribute="leading" constant="20" id="oAA-U3-4IE"/>
                                 </constraints>
                             </view>
@@ -366,13 +366,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="Weather Details" id="aGU-Ve-Dhu"/>
                     <connections>
+                        <outlet property="cityNameLabel" destination="8k8-47-efj" id="VxS-oQ-xe9"/>
                         <outlet property="countryLabel" destination="djB-RP-GPQ" id="u1Z-Ob-fC1"/>
+                        <outlet property="currentTempLabel" destination="U5M-Ta-y73" id="rWg-KY-iAR"/>
                         <outlet property="feelsLikeLabel" destination="UzV-4d-1Cb" id="GKi-3a-Bmh"/>
                         <outlet property="humidityLabel" destination="RRK-Qa-GGU" id="PvO-qc-Fcz"/>
+                        <outlet property="lowHighTempLabel" destination="9fG-Bh-VuN" id="XPF-H3-VSp"/>
                         <outlet property="pressureLabel" destination="l3m-8g-yMC" id="PZb-PV-H2L"/>
                         <outlet property="sunRiseLabel" destination="N9Y-1I-0Kw" id="t68-nk-l65"/>
                         <outlet property="sunSetLabel" destination="l1b-sY-RT1" id="PrA-AV-DI5"/>
                         <outlet property="visibilityLabel" destination="DD2-PW-GF4" id="vGZ-65-WDJ"/>
+                        <outlet property="weatherConLabel" destination="otw-mg-UAK" id="zQf-Qh-PZ9"/>
                         <outlet property="windLabel" destination="hWN-2h-xRU" id="ngh-A2-Eys"/>
                     </connections>
                 </viewController>

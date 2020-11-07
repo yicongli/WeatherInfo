@@ -11,8 +11,9 @@ class WeatherDetailViewModel {
     
     var cityInfo:WeatherInfoProperties? = nil
     
-    func updateCityInfo(_ info:WeatherInfoProperties){
+    func updateCityInfo(_ info:WeatherInfoProperties, completionHandler:@escaping (()->())){
         cityInfo = info
+        completionHandler()
     }
 }
 

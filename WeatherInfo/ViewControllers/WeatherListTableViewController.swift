@@ -30,6 +30,24 @@ class WeatherListTableViewController: UITableViewController {
             }
         }
         
+        fetchAllCityInfo()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        model.startTimer {
+            self.fetchAllCityInfo()
+            
+            if let vc = self.navigationController?.topViewController as? WeatherDetailViewController {
+                vc.model.updateCityInfo(self.model.selectedCity!) {
+                    vc.setLabels()
+                }
+            }
+        }
+    }
+    
+    func fetchAllCityInfo() {
         spinner.startAnimating()
         navigationItem.rightBarButtonItem?.isEnabled = false
         
@@ -38,10 +56,6 @@ class WeatherListTableViewController: UITableViewController {
             self?.spinner.stopAnimating()
             self?.navigationItem.rightBarButtonItem?.isEnabled = true
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     @IBAction func showSearchVC(_ sender: Any) {
@@ -59,7 +73,7 @@ class WeatherListTableViewController: UITableViewController {
         let vc = storyboard.instantiateViewController(
             withIdentifier: String(describing: WeatherDetailViewController.self)) as! WeatherDetailViewController
         
-        vc.model.updateCityInfo(selectedInfo)
+        vc.model.updateCityInfo(selectedInfo) {}
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -90,6 +104,8 @@ extension WeatherListTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Did selet row at: \(indexPath.row)")
-        showDetailsVC(selectedInfo: model.cityList[indexPath.row])
+    
+        model.selectedIndex = indexPath.row
+        showDetailsVC(selectedInfo: model.selectedCity!)
     }
 }
