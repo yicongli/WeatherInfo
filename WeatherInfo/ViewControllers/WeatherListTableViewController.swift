@@ -34,7 +34,7 @@ class WeatherListTableViewController: UITableViewController {
             if let vc = self?.navigationController?.topViewController as? WeatherDetailViewController,
                let city = self?.model.selectedCity {
                 vc.model.updateCityInfo(city) {
-                    vc.setLabels()
+                    vc.setContents()
                 }
             }
         }

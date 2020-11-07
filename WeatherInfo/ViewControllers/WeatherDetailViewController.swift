@@ -13,15 +13,7 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var weatherConLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var lowHighTempLabel: UILabel!
-    
-    @IBOutlet weak var sunRiseLabel: UILabel!
-    @IBOutlet weak var sunSetLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var visibilityLabel: UILabel!
-    @IBOutlet weak var windLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     let model = WeatherDetailViewModel()
     
@@ -29,10 +21,10 @@ class WeatherDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setLabels()
+        setContents()
     }
     
-    func setLabels() {
+    func setContents() {
         guard let info = model.cityInfo else {
             debugPrint("no city info")
             return
@@ -43,13 +35,23 @@ class WeatherDetailViewController: UIViewController {
         currentTempLabel.text = String.doulbelToTempStr(temp: info.main.temp)
         lowHighTempLabel.text = "L:\(String.doulbelToTempStr(temp: info.main.tempMin)) H:\(String.doulbelToTempStr(temp: info.main.tempMax))"
 
-        sunRiseLabel.text = Date.numberToTimeStr(dateNumber: info.sys.sunrise, secondsFromGMT: info.sys.timezone)
-        sunSetLabel.text = Date.numberToTimeStr(dateNumber: info.sys.sunset, secondsFromGMT: info.sys.timezone)
-        feelsLikeLabel.text = String.doulbelToTempStr(temp: info.main.feelsLike)
-        humidityLabel.text = "\(info.main.humidity)%"
-        pressureLabel.text = "\(info.main.pressure) hPa"
-        visibilityLabel.text = "\(Double(info.visibility)/1000) km"
-        windLabel.text = "\(info.wind.speed) km/h"
-        countryLabel.text = info.sys.country
+        tableView.reloadData()
     }
+}
+
+extension WeatherDetailViewController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.detailInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
+
+        let item = model.detailInfo[indexPath.row]
+        cell.textLabel?.text = item.name
+        cell.detailTextLabel?.text = item.data
+
+        return cell
+    }
+    
 }

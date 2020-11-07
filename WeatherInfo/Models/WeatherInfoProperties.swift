@@ -32,4 +32,20 @@ struct WeatherInfoProperties: Decodable {
         case id         = "id"
         case name       = "name"
     }
+    
+    func infoArray() -> [(name: String, data:String)] {
+
+        var array:[(name: String, data:String)] = []
+        
+        array.append(("SUNRISE", Date.numberToTimeStr(dateNumber:sys.sunrise, secondsFromGMT:sys.timezone)))
+        array.append(("SUNSET", Date.numberToTimeStr(dateNumber:sys.sunset, secondsFromGMT:sys.timezone)))
+        array.append(("FEELS LIKE", String.doulbelToTempStr(temp:main.feelsLike)))
+        array.append(("HUMIDITY", "\(main.humidity)%"))
+        array.append(("PRESSURE", "\(main.pressure) hPa"))
+        array.append(("VISIBILITY", "\(Double(visibility)/1000) km"))
+        array.append(("WIND", "\(wind.speed) km/h"))
+        array.append(("COUNTRY", sys.country))
+        
+        return array
+    }
 }

@@ -10,9 +10,12 @@ import Foundation
 class WeatherDetailViewModel {
     
     var cityInfo:WeatherInfoProperties? = nil
+    var detailInfo: [(name: String, data:String)] = []
     
     func updateCityInfo(_ info:WeatherInfoProperties, completionHandler:@escaping (()->())){
         cityInfo = info
+        detailInfo = info.infoArray()
+        
         completionHandler()
     }
 }
