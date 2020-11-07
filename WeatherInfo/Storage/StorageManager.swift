@@ -44,9 +44,10 @@ extension StorageManager {
         DispatchQueue.global().async {
             let fetchRequest = NSFetchRequest<CityID>(entityName: Keys.entryName)
             do {
-                let data = try self.persistentContainer.viewContext.fetch(fetchRequest)
+                var data = try self.persistentContainer.viewContext.fetch(fetchRequest)
                 var cityIdList:[Int] = []
                 
+                data.sort{ $0.time_stamp < $1.time_stamp }
                 for item in data {
                     cityIdList.append(Int(item.city_id))
                 }
@@ -83,6 +84,7 @@ extension StorageManager {
             }
             
             cityID.city_id = Int64(id)
+            cityID.time_stamp = Date().timeIntervalSince1970
         }
         
         if context.hasChanges {

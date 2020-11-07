@@ -24,6 +24,8 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
+        
+        model.delegate = self
         model.setupLocationManager()
         
         let mytapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myTapAction))
@@ -90,10 +92,9 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setAnnotationWithPlaceMark(_ placemark:MKPlacemark) {
-        // cache the pin
         model.selectedPin = placemark
-        // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
+        
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         //annotation.title = placemark.name
