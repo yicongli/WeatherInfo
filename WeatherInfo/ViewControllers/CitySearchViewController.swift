@@ -72,7 +72,6 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let resultVC = storyboard.instantiateViewController(
             withIdentifier: String(describing: "SearchResultTableViewController")) as! SearchResultTableViewController
-        resultVC.mapView = mapView
         resultVC.mapSearchDelegate = self
         
         resultSearchController = UISearchController(searchResultsController: resultVC)
