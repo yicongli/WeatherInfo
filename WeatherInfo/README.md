@@ -6,6 +6,7 @@
 4. The project folder has contained all the needed components and can be run directly.
 5. All images used in the project are from copyright-free resources.
 
+The histoy of the implemention can be found in git inside the project.
 
 If there are any issues or questions, please contact me at any time by email (rick.yicong.li@gmail.com) or mobile (0452663520)
 
