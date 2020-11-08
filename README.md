@@ -8,5 +8,5 @@
 
 The histoy of the implemention can be found in git inside the project.
 
-If there are any issues or questions, please contact me at any time by email (rick.yicong.li@gmail.com) or mobile (0452663520)
+If there are any issues or questions, please contact me at any time by email (rick.yicong.li@gmail.com)
 
