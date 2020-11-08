@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  Full weather info for one city
 
 import Foundation
 

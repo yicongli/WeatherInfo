@@ -8,10 +8,11 @@
 import UIKit
 import MapKit
 
+// the table view showing the search result
 class SearchResultTableViewController: UITableViewController {
 
+    /// store items that match the searching result
     var matchingItems: [MKMapItem] = []
-    var mapView: MKMapView? = nil
     var mapSearchDelegate: HandleMapSearch? = nil
     
     override func viewDidLoad() {
@@ -50,6 +51,8 @@ extension SearchResultTableViewController {
 }
 
 extension SearchResultTableViewController: UISearchResultsUpdating {
+    
+    // send request and show the result on the list
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchBarText = searchController.searchBar.text else {
             return
@@ -57,7 +60,6 @@ extension SearchResultTableViewController: UISearchResultsUpdating {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchBarText
-        //request.region = mapView.region
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
             guard let response = response else {

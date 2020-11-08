@@ -8,11 +8,13 @@
 import UIKit
 import MapKit
 
+/// handle selection on the result list view
 protocol HandleMapSearch {
     
     func dropPinZoomIn(placemark: MKPlacemark)
 }
 
+/// main VC for showing result and mapview
 class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
 
     let model = WeatherSearchViewModel()
@@ -25,9 +27,11 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setupSearchBar()
         
+        // set up search viewmodel
         model.delegate = self
         model.setupLocationManager()
         
+        // set up tap gesture for location selection on map
         let mytapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myTapAction))
         mytapGestureRecognizer.numberOfTapsRequired = 1
         mapView.addGestureRecognizer(mytapGestureRecognizer)
@@ -36,6 +40,7 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Actions
     @objc func myTapAction(recognizer: UITapGestureRecognizer) {
+        // update current annoation location after tap on map
         let location = recognizer.location(in: mapView)
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
         
@@ -47,11 +52,13 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
         self.dismiss(animated: true) {}
     }
     
+    /// action for handling touch add button
     @IBAction func addNewCity(_ sender: Any) {
         self.dismiss(animated: true) {}
         resultDelegate?.didSelectCity(placemark: model.selectedPin!)
     }
     
+    /// go back to current user location
     @IBAction func backToCurrentLocation(_ sender: Any) {
         guard let location = model.currentUserLocation else {
             return
@@ -81,7 +88,7 @@ class CitySearchViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setAnnotationWithLocation(_ location:CLLocation){
-        // Look up the location and pass it to the completion handler
+        // look up the location and pass it to the completion handler
         CLGeocoder().reverseGeocodeLocation(location,
                     completionHandler: {[weak self] (placemarks, error) in
             if error == nil {

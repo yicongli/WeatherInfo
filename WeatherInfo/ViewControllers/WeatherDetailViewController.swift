@@ -22,11 +22,13 @@ class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // detail list doesn't allow selection
         tableView.allowsSelection = false
         setContents()
         setImageView()
     }
     
+    // show all info in the VC
     func setContents() {
         guard let info = model.cityInfo else {
             debugPrint("no city info")
@@ -41,7 +43,7 @@ class WeatherDetailViewController: UIViewController {
         tableView.reloadData()
     }
     
-    // set imangeView
+    // set imangeView for weather icon
     func setImageView () {
         guard let info = model.cityInfo, let icon = info.weather.first?.icon else {
             debugPrint("no image info")

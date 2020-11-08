@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  weather condition info for the specific place
 
 import Foundation
 

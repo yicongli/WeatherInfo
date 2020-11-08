@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  coordinate info for selected place
 
 import Foundation
 

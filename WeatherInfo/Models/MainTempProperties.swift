@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  temperature related info of the weather
 
 import Foundation
 

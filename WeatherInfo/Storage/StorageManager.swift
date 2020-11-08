@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  manage all storing operations
 
 import Foundation
 import CoreData
@@ -18,6 +19,7 @@ class StorageManager {
         static let defaultIDs = [4163971, 2147714, 2174003]
     }
     
+    /// container for storage
     lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: Keys.containerName)
@@ -40,6 +42,7 @@ class StorageManager {
 // MARK: - Core Data Saving support
 extension StorageManager {
 
+    /// get all city IDs from storage and return through completionhandler
     func getAllCitiesID(completionHandler: @escaping ([Int]) -> Void){
         DispatchQueue.global().async {
             let fetchRequest = NSFetchRequest<CityID>(entityName: Keys.entryName)
@@ -47,11 +50,13 @@ extension StorageManager {
                 var data = try self.persistentContainer.viewContext.fetch(fetchRequest)
                 var cityIdList:[Int] = []
                 
+                // sort the data with time stamp, ensure the list shown is in the order of add
                 data.sort{ $0.time_stamp < $1.time_stamp }
                 for item in data {
                     cityIdList.append(Int(item.city_id))
                 }
                 
+                // if no local storage, store default IDs
                 if cityIdList.count == 0 {
                     cityIdList = Keys.defaultIDs
                     self.storeAllCitiesID(cityIDs: cityIdList) 
@@ -65,12 +70,15 @@ extension StorageManager {
         }
     }
     
+    /// store all city IDs into the local storage
+    /// - Parameter cityIDs: all city IDs
     func storeAllCitiesID(cityIDs:[Int]) {
         
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: Keys.entryName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
+        // overwrite all local storage everytime store IDs
         do {
             try context.execute(deleteRequest)
         } catch let error as NSError {
@@ -84,9 +92,10 @@ extension StorageManager {
             }
             
             cityID.city_id = Int64(id)
-            cityID.time_stamp = Date().timeIntervalSince1970
+            cityID.time_stamp = Date().timeIntervalSince1970 // add time stamp for order
         }
         
+        // save order
         if context.hasChanges {
             do {
                 try context.save()

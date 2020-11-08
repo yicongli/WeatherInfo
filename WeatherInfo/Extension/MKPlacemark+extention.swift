@@ -10,6 +10,7 @@ import MapKit
 
 extension MKPlacemark {
     
+    /// return formatted address string
     func parseAddress() -> String {
         let firstSpace = (subThoroughfare != nil && thoroughfare != nil) ? " " : ""
         let comma = (subThoroughfare != nil || thoroughfare != nil) && (subAdministrativeArea != nil || administrativeArea != nil) ? ", " : ""

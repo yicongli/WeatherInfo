@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 7/11/20.
 //
+//  receiced city info for identify city ID
 
 import Foundation
 

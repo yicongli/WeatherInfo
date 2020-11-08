@@ -9,6 +9,9 @@ import Foundation
 
 extension Date {
     
+    
+    /// convert timeinterval to time str
+    /// - Returns: time str, eg. 18:69
     static func numberToTimeStr(dateNumber: Int, secondsFromGMT: Int) -> String {
         
         let timeInterval = TimeInterval(dateNumber + secondsFromGMT)

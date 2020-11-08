@@ -4,6 +4,7 @@
 //
 //  Created by Yicong Li on 6/11/20.
 //
+//  Manage all API connection
 
 import Foundation
 import Alamofire
@@ -21,6 +22,7 @@ class ApiManager {
         
     }
     
+    /// request one city info from server
     func fetchSingleCityInfoWith(placemark: MKPlacemark,
                        completionHandler: @escaping ((ShortCityInfo) -> ())) {
         let city = placemark.locality ?? ""
@@ -42,6 +44,7 @@ class ApiManager {
         }
     }
     
+    /// request multiple cities info from server by city IDs
     func fetchInfoWith(cityIDs: [Int], completionHandler: @escaping ((WeatherListProperties) -> ())) {
         
         let idStr = cityIDs.map(String.init).joined(separator: ",")
@@ -49,6 +52,7 @@ class ApiManager {
         fetchMultipleWeatherInfoWith(param: param, completionHandler: completionHandler)
     }
     
+    /// request multiple cityies info
     private func fetchMultipleWeatherInfoWith(param: [String:String],
                                       completionHandler: @escaping ((WeatherListProperties) -> ())) {
         

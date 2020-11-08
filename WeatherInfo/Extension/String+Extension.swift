@@ -9,6 +9,8 @@ import Foundation
 
 extension String {
     
+    /// convert double to temp string
+    /// - Returns: temperature string eg. 14°
     static func doulbelToTempStr(temp: Double) -> String{
         return "\(Int(temp))°"
     }

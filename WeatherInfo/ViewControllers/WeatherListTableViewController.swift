@@ -9,15 +9,18 @@ import UIKit
 import SnapKit
 import MapKit
 
+/// handle operations after select city/location
 protocol HandleCitySelection {
     
     func didSelectCity(placemark: MKPlacemark)
 }
 
+/// show all city temperature
 class WeatherListTableViewController: UITableViewController {
 
     let model = WeatherListViewModel()
     
+    /// spinner for showing loading process
     private lazy var spinner: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.color = .gray
@@ -28,6 +31,16 @@ class WeatherListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set spinner at central location
+        if spinner.superview == nil, let superView = tableView.superview {
+            superView.addSubview(spinner)
+            superView.bringSubviewToFront(spinner)
+            spinner.snp.makeConstraints { (maker) in
+                maker.center.equalToSuperview()
+            }
+        }
+        
+        // update all city info every hour
         model.startTimer { [weak self] in
             self?.fetchAllCityInfo()
             
@@ -43,17 +56,11 @@ class WeatherListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if spinner.superview == nil, let superView = tableView.superview {
-            superView.addSubview(spinner)
-            superView.bringSubviewToFront(spinner)
-            spinner.snp.makeConstraints { (maker) in
-                maker.center.equalToSuperview()
-            }
-        }
-        
+        // update info every time show the list
         fetchAllCityInfo()
     }
     
+    /// show search vc when touch + button
     @IBAction func showSearchVC(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nav = storyboard.instantiateViewController(
@@ -67,6 +74,7 @@ class WeatherListTableViewController: UITableViewController {
         self.present(nav, animated: true) {}
     }
     
+    /// show detail vc when touch cell in the tableview
     func showDetailsVC(selectedInfo: WeatherInfoProperties) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(
@@ -77,6 +85,7 @@ class WeatherListTableViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    /// fetch all stored city ID and then send request to server
     func fetchAllCityInfo() {
         spinner.startAnimating()
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -123,6 +132,7 @@ extension WeatherListTableViewController {
 // MARK: - 
 extension WeatherListTableViewController: HandleCitySelection {
     
+    /// when select city, upudate the whole list
     func didSelectCity(placemark: MKPlacemark) {
         spinner.startAnimating()
         navigationItem.rightBarButtonItem?.isEnabled = false
